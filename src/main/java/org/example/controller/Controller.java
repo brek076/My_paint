@@ -3,6 +3,10 @@ package org.example.controller;
 import org.example.model.Model;
 import org.example.model.MyShape;
 import org.example.model.shape.fill.NoFill;
+import org.example.model.shape.observer.EventListeners;
+import org.example.model.shape.observer.EventManager;
+import org.example.model.shape.observer.LoggingAlertListener;
+import org.example.model.shape.observer.ShapeAlertListener;
 import org.example.view.MyFrame;
 import org.example.view.MyPanel;
 
@@ -28,17 +32,28 @@ public class Controller {
     }
 
     private Controller() {
-        model = new Model();
+        EventListeners shapeAlertListener = new ShapeAlertListener();
+        EventListeners loggingAlertListener = new LoggingAlertListener();
+        EventManager eventManager = new EventManager();
+
+        model = new Model(eventManager);
         MyShape shape = new MyShape(new Rectangle2D.Double());
         shape.setFb(new NoFill());
         model.setMyShape(shape);
 
         panel = new MyPanel(this);
-        // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
-        model.addObserver(panel);
 
         frame = new MyFrame();
         frame.setPanel(panel);
+        // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
+        // Заменить???
+        model.addObserver(panel);
+
+        eventManager.subscribe(shapeAlertListener);
+        eventManager.subscribe(loggingAlertListener);
+        //eventManager.subscribe(System.out::println);
+
+
     }
     public void getPointOne(Point2D p){
         firstPoint = p;
