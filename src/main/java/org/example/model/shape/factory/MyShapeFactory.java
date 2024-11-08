@@ -15,6 +15,7 @@ public class MyShapeFactory {
         if(fb == null)
             fb = new NoFill();
 
+        System.out.println(type);
         return new MyShape(color, type.createShape(),fb);
     }
 }

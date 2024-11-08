@@ -11,7 +11,7 @@ public enum ShapeType {
             return new Rectangle2D.Double();
         }
     },
-    ELIPSE{
+    ELLIPSE{
         @Override
         public Ellipse2D createShape(){
             return new Ellipse2D.Double();

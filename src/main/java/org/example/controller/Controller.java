@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.controller.action.ActionDraw;
 import org.example.model.Model;
 import org.example.model.MyShape;
 import org.example.model.shape.factory.MyShapeFactory;
@@ -25,6 +26,9 @@ public class Controller {
     private MyPanel panel;
     private Point2D firstPoint;
     private Point2D secondPoint;
+    private ActionDraw actionDraw;
+    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
+    private MyShapeFactory factory;
 
     public static Controller getInstance(){
         if(instance == null){
@@ -35,41 +39,41 @@ public class Controller {
     }
 
     private Controller() {
+        panel = new MyPanel(this);
+        frame = new MyFrame();
+        frame.setPanel(panel);
+
+        MenuController menuController = new MenuController();
+        frame.setJMenuBar(menuController.getMenuBar());
+
         EventListeners shapeAlertListener = new ShapeAlertListener();
         EventListeners loggingAlertListener = new LoggingAlertListener();
         EventManager eventManager = new EventManager();
 
-        model = new Model(eventManager);
+        model = Model.getInstance(eventManager);
 
-        //MyShape shape = new MyShape(new Rectangle2D.Double());
-//        MyShape shape = new MyShape(factory.createShape(ShapeType.ELIPSE));
-        MyShapeFactory factory = new MyShapeFactory();
-//        MyShape shape = factory.createShape(ShapeType.ELIPSE, Color.CYAN, new Fill());
-        MyShape shape = factory.createShape(ShapeType.ELIPSE, null, null);
+        factory = new MyShapeFactory();
 
-        model.setMyShape(shape);
-
-        panel = new MyPanel(this);
-
-        frame = new MyFrame();
-        frame.setPanel(panel);
         // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
         // Заменить???
         model.addObserver(panel);
 
         eventManager.subscribe(shapeAlertListener);
         eventManager.subscribe(loggingAlertListener);
-        //eventManager.subscribe(System.out::println);
+
+        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, null, null));
     }
-    public void getPointOne(Point2D p){
-        firstPoint = p;
+    public void mousePressed(Point p){
+        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, null, null));
+        this.actionDraw.createShape(p);
     }
-    public void getPointTwo(Point2D p){
-        secondPoint = p;
-        model.changeShape(firstPoint, secondPoint);
+
+    public void mouseDragged(Point p){
+        this.actionDraw.stretchShape(p);
     }
 
     public void draw(Graphics2D g2) {
         model.draw(g2);
+
     }
 }
