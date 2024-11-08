@@ -2,6 +2,9 @@ package org.example.controller;
 
 import org.example.model.Model;
 import org.example.model.MyShape;
+import org.example.model.shape.factory.MyShapeFactory;
+import org.example.model.shape.factory.ShapeType;
+import org.example.model.shape.fill.Fill;
 import org.example.model.shape.fill.NoFill;
 import org.example.model.shape.observer.EventListeners;
 import org.example.model.shape.observer.EventManager;
@@ -37,8 +40,13 @@ public class Controller {
         EventManager eventManager = new EventManager();
 
         model = new Model(eventManager);
-        MyShape shape = new MyShape(new Rectangle2D.Double());
-        shape.setFb(new NoFill());
+
+        //MyShape shape = new MyShape(new Rectangle2D.Double());
+//        MyShape shape = new MyShape(factory.createShape(ShapeType.ELIPSE));
+        MyShapeFactory factory = new MyShapeFactory();
+//        MyShape shape = factory.createShape(ShapeType.ELIPSE, Color.CYAN, new Fill());
+        MyShape shape = factory.createShape(ShapeType.ELIPSE, null, null);
+
         model.setMyShape(shape);
 
         panel = new MyPanel(this);
@@ -52,8 +60,6 @@ public class Controller {
         eventManager.subscribe(shapeAlertListener);
         eventManager.subscribe(loggingAlertListener);
         //eventManager.subscribe(System.out::println);
-
-
     }
     public void getPointOne(Point2D p){
         firstPoint = p;
