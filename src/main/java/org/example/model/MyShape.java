@@ -32,7 +32,7 @@ public class MyShape implements Cloneable{
     }
 
     // TODO: 25.10.2024  Попробовать вызовы через разные конструкторы, затем переделать создание через фабрику
-    public MyShape(Color color, RectangularShape shape, FillBehavior fb) {
+    public MyShape(RectangularShape shape, Color color,  FillBehavior fb) {
         this.color = color;
         this.shape = shape;
         this.fb = fb;
@@ -55,6 +55,7 @@ public class MyShape implements Cloneable{
     }
 
     public void draw(Graphics2D g) {
+        System.out.println(fb);
         fb.draw(g);
     }
 

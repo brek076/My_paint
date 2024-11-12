@@ -48,6 +48,8 @@ public class Model extends Observable{
         this.currentShape = shape;
         //Метод должен устанавливать
         //currentShape в переданную фигуру????
+        System.out.println(shape);
+
         myShapes.add(shape);
     }
 }

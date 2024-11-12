@@ -18,13 +18,13 @@ public class ActionDraw {
     }
 
     public void stretchShape(Point point){
-        points[0] = (Point2D) point;
-        shape.setFrame(points[0], points[1]);
+        this.points[0] = (Point2D) point;
+        this.shape.setFrame(points[0], points[1]);
     }
 
     public void createShape(Point point){
         points[1] = (Point2D) point;
-        shape = sampleShape.clone();
+        this.shape = sampleShape.clone();
         model.createCurrentShape(shape);
     }
 }

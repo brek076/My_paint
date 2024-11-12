@@ -6,6 +6,7 @@ import org.example.model.MyShape;
 import org.example.model.shape.factory.MyShapeFactory;
 import org.example.model.shape.factory.ShapeType;
 import org.example.model.shape.fill.Fill;
+import org.example.model.shape.fill.FillBehavior;
 import org.example.model.shape.fill.NoFill;
 import org.example.model.shape.observer.EventListeners;
 import org.example.model.shape.observer.EventManager;
@@ -28,6 +29,8 @@ public class Controller {
     private Point2D secondPoint;
     private ActionDraw actionDraw;
     public static ShapeType selectedShape = ShapeType.RENCTAGLE;
+    public static FillBehavior selectedFill = new NoFill();
+    public static Color selectedColor = Color.RED;
     private MyShapeFactory factory;
 
     public static Controller getInstance(){
@@ -39,6 +42,7 @@ public class Controller {
     }
 
     private Controller() {
+        factory = new MyShapeFactory();
         panel = new MyPanel(this);
         frame = new MyFrame();
         frame.setPanel(panel);
@@ -46,25 +50,23 @@ public class Controller {
         MenuController menuController = new MenuController();
         frame.setJMenuBar(menuController.getMenuBar());
 
+
+        // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
+        // Заменить???
         EventListeners shapeAlertListener = new ShapeAlertListener();
         EventListeners loggingAlertListener = new LoggingAlertListener();
         EventManager eventManager = new EventManager();
 
-        model = Model.getInstance(eventManager);
-
-        factory = new MyShapeFactory();
-
-        // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
-        // Заменить???
-        model.addObserver(panel);
 
         eventManager.subscribe(shapeAlertListener);
         eventManager.subscribe(loggingAlertListener);
 
-        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, null, null));
+        model = Model.getInstance(eventManager);
+        model.addObserver(panel);
+
     }
     public void mousePressed(Point p){
-        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, null, null));
+        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, selectedColor,new NoFill()));
         this.actionDraw.createShape(p);
     }
 
