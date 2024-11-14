@@ -28,10 +28,10 @@ public class Controller {
     private Point2D firstPoint;
     private Point2D secondPoint;
     private ActionDraw actionDraw;
+    private MyShapeFactory factory;
     public static ShapeType selectedShape = ShapeType.RENCTAGLE;
     public static FillBehavior selectedFill = new NoFill();
     public static Color selectedColor = Color.RED;
-    private MyShapeFactory factory;
 
     public static Controller getInstance(){
         if(instance == null){
@@ -66,7 +66,7 @@ public class Controller {
 
     }
     public void mousePressed(Point p){
-        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, selectedColor,new NoFill()));
+        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, selectedColor, selectedFill));
         this.actionDraw.createShape(p);
     }
 

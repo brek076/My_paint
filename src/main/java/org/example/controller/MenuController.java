@@ -24,8 +24,8 @@ public class MenuController {
         JMenu fllMenu = createFillMenu();
         JMenu colorMenu = createColorMenu();
         menu.add(shapeMenu);
-        menu.add(colorMenu);
         menu.add(fllMenu);
+        menu.add(colorMenu);
     }
 
     public static MenuController getInstance(){
