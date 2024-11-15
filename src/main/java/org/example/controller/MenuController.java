@@ -11,6 +11,11 @@ import java.awt.*;
 
 public class MenuController {
     private static MenuController instance;
+    private MenuState menuState;
+
+    public MenuState getMenuState() {
+        return menuState;
+    }
 
     public JMenuBar getMenuBar() {
         return menu;
@@ -19,6 +24,8 @@ public class MenuController {
     private JMenuBar menu;
 
     public MenuController() {
+        this.menuState = new MenuState();
+
         menu = new JMenuBar();
         JMenu shapeMenu = createShapeMenu();
         JMenu fllMenu = createFillMenu();
@@ -42,13 +49,13 @@ public class MenuController {
         JMenu shapeMenu = new JMenu("Фигура");
         ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem square = new JRadioButtonMenuItem("Прямоугольник");
-        square.addActionListener(e -> Controller.selectedShape = ShapeType.RENCTAGLE);
+        square.addActionListener(e -> menuState.setShapeType(ShapeType.RENCTAGLE));
         square.setSelected(true);
         shapeMenu.add(square);
 
         group.add(square);
         JRadioButtonMenuItem ellipse = new JRadioButtonMenuItem("Эллипс");
-        ellipse.addActionListener(e -> Controller.selectedShape = ShapeType.ELLIPSE);
+        ellipse.addActionListener(e -> menuState.setShapeType(ShapeType.ELLIPSE));
         shapeMenu.add(ellipse);
         group.add(ellipse);
         return shapeMenu;
@@ -60,13 +67,13 @@ public class MenuController {
         ButtonGroup group = new ButtonGroup();
 
         JRadioButtonMenuItem noFilled = new JRadioButtonMenuItem("Без Заливки");
-        noFilled.addActionListener(e -> Controller.selectedFill = new NoFill());
+        noFilled.addActionListener(e -> menuState.setFill(false));
         noFilled.setSelected(true);
         group.add(noFilled);
         fillMenu.add(noFilled);
 
         JRadioButtonMenuItem filled = new JRadioButtonMenuItem("С Заливкой");
-        filled.addActionListener(e -> Controller.selectedFill = new Fill());
+        filled.addActionListener(e -> menuState.setFill(true));
         group.add(filled);
         fillMenu.add(filled);
 
@@ -80,18 +87,18 @@ public class MenuController {
         ButtonGroup group = new ButtonGroup();
 
         JRadioButtonMenuItem red = new JRadioButtonMenuItem("Красный");
-        red.addActionListener(e -> Controller.selectedColor = Color.RED);
+        red.addActionListener(e -> menuState.setColor(Color.RED));
         red.setSelected(true);
         group.add(red);
         colorMenu.add(red);
 
         JRadioButtonMenuItem green = new JRadioButtonMenuItem("Зеленый");
-        green.addActionListener(e -> Controller.selectedColor = Color.GREEN);
+        green.addActionListener(e -> menuState.setColor(Color.GREEN));
         group.add(green);
         colorMenu.add(green);
 
         JRadioButtonMenuItem blue = new JRadioButtonMenuItem("Синий");
-        blue.addActionListener(e -> Controller.selectedColor =Color.BLUE);
+        blue.addActionListener(e -> menuState.setColor(Color.BLUE));
         group.add(blue);
         colorMenu.add(blue);
 

@@ -6,7 +6,7 @@ import org.example.model.MyShape;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class ActionDraw {
+public class ActionDraw implements AppAction{
     private MyShape sampleShape;
     private MyShape shape;
     private Model model;
@@ -26,5 +26,15 @@ public class ActionDraw {
         points[1] = (Point2D) point;
         this.shape = sampleShape.clone();
         model.createCurrentShape(shape);
+    }
+
+    @Override
+    public void mousePressed(Point point) {
+
+    }
+
+    @Override
+    public void mouseDragged(Point point) {
+
     }
 }

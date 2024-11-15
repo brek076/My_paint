@@ -11,7 +11,7 @@ import java.util.Observable;
 // TODO: 25.10.2024 Сделать singleton класс
 public class Model extends Observable{
     private static Model instance;
-    private MyShape currentShape;
+    private MyShape currentShape; // Убрать
     private EventManager eventManager;
     public static ArrayList<MyShape> myShapes = new ArrayList<MyShape>();
 
@@ -27,17 +27,17 @@ public class Model extends Observable{
         return instance;
     }
 
-    public void setMyShape(MyShape myShape) {
-        this.currentShape = myShape.clone();
-        eventManager.notifyAll("setMyShape");
-    }
-
-    public void changeShape(Point2D x, Point2D y) {
-        currentShape.setFrame(x, y);
-        this.setChanged();
-        this.notifyObservers();
-        eventManager.notifyAll("changeShape");
-    }
+//    public void setMyShape(MyShape myShape) {
+//        this.currentShape = myShape.clone();
+//        eventManager.notifyAll("setMyShape");
+//    }
+//
+//    public void changeShape(Point2D x, Point2D y) {
+//        currentShape.setFrame(x, y);
+//        this.setChanged();
+//        this.notifyObservers();
+//        eventManager.notifyAll("changeShape");
+//    }
 
     public void draw(Graphics2D g) {
         currentShape.draw(g);
@@ -45,11 +45,7 @@ public class Model extends Observable{
     }
 
     public void createCurrentShape(MyShape shape){
-        this.currentShape = shape;
-        //Метод должен устанавливать
-        //currentShape в переданную фигуру????
-        System.out.println(shape);
-
+//        this.currentShape = shape;
         myShapes.add(shape);
     }
 }

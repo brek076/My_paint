@@ -3,7 +3,7 @@ package org.example.controller;
 import org.example.controller.action.ActionDraw;
 import org.example.model.Model;
 import org.example.model.MyShape;
-import org.example.model.shape.factory.MyShapeFactory;
+import org.example.model.shape.factory.ShapeCreator;
 import org.example.model.shape.factory.ShapeType;
 import org.example.model.shape.fill.Fill;
 import org.example.model.shape.fill.FillBehavior;
@@ -28,10 +28,12 @@ public class Controller {
     private Point2D firstPoint;
     private Point2D secondPoint;
     private ActionDraw actionDraw;
-    private MyShapeFactory factory;
-    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
-    public static FillBehavior selectedFill = new NoFill();
-    public static Color selectedColor = Color.RED;
+    private ShapeCreator factory;
+
+    private MenuController menuController;
+//    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
+//    public static boolean selectedFill = false;
+//    public static Color selectedColor = Color.RED;
 
     public static Controller getInstance(){
         if(instance == null){
@@ -42,12 +44,12 @@ public class Controller {
     }
 
     private Controller() {
-        factory = new MyShapeFactory();
+        factory = new ShapeCreator();
         panel = new MyPanel(this);
         frame = new MyFrame();
         frame.setPanel(panel);
 
-        MenuController menuController = new MenuController();
+        menuController = new MenuController();
         frame.setJMenuBar(menuController.getMenuBar());
 
 
@@ -63,10 +65,9 @@ public class Controller {
 
         model = Model.getInstance(eventManager);
         model.addObserver(panel);
-
     }
     public void mousePressed(Point p){
-        this.actionDraw = new ActionDraw(model, factory.createShape(selectedShape, selectedColor, selectedFill));
+        this.actionDraw = new ActionDraw(model, factory.createShape());
         this.actionDraw.createShape(p);
     }
 
@@ -76,6 +77,5 @@ public class Controller {
 
     public void draw(Graphics2D g2) {
         model.draw(g2);
-
     }
 }
