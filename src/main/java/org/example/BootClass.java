@@ -7,8 +7,3 @@ public class BootClass {
         Controller controller = Controller.getInstance();
     }
 }
-//1+
-//2+-, более лучшая реализация наблюдателя. Скидывали в чат
-//3
-//4
-//5

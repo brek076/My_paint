@@ -29,4 +29,9 @@ public class NoFill implements FillBehavior {
     public void setShape(RectangularShape s) {
         shape = s;
     }
+
+    @Override
+    public RectangularShape getShape() {
+        return shape;
+    }
 }

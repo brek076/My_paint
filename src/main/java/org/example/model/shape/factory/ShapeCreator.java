@@ -13,7 +13,7 @@ public class ShapeCreator {
     private static ShapeCreator instance;
     private MenuState state;
 
-    public static ShapeCreator getInstance(){
+    private static ShapeCreator getInstance(){
         if(instance == null){
             instance = new ShapeCreator();
         }
@@ -21,9 +21,8 @@ public class ShapeCreator {
         return instance;
     }
 
-
     public void configurate(MenuState state){
-
+        this.state = state;
     }
 
     public MyShape createShape(){

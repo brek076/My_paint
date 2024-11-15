@@ -24,8 +24,10 @@ public class ActionDraw implements AppAction{
 
     public void createShape(Point point){
         points[1] = (Point2D) point;
+        System.out.println(sampleShape);
         this.shape = sampleShape.clone();
         model.createCurrentShape(shape);
+        // Сделать создание с помощью факторки
     }
 
     @Override

@@ -42,10 +42,12 @@ public class Model extends Observable{
     public void draw(Graphics2D g) {
         currentShape.draw(g);
         eventManager.notifyAll("draw");
+//        eventManager.notifyAll("setMyShape");
     }
 
     public void createCurrentShape(MyShape shape){
-//        this.currentShape = shape;
+        //this.currentShape = shape;
+//        eventManager.notifyAll("changeShape");
         myShapes.add(shape);
     }
 }

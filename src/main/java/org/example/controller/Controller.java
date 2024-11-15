@@ -2,12 +2,7 @@ package org.example.controller;
 
 import org.example.controller.action.ActionDraw;
 import org.example.model.Model;
-import org.example.model.MyShape;
 import org.example.model.shape.factory.ShapeCreator;
-import org.example.model.shape.factory.ShapeType;
-import org.example.model.shape.fill.Fill;
-import org.example.model.shape.fill.FillBehavior;
-import org.example.model.shape.fill.NoFill;
 import org.example.model.shape.observer.EventListeners;
 import org.example.model.shape.observer.EventManager;
 import org.example.model.shape.observer.LoggingAlertListener;
@@ -25,10 +20,11 @@ public class Controller {
     private Model model;
     private MyFrame frame;
     private MyPanel panel;
-    private Point2D firstPoint;
-    private Point2D secondPoint;
+//    private Point2D firstPoint;
+//    private Point2D secondPoint;
     private ActionDraw actionDraw;
     private ShapeCreator factory;
+    public MenuState menuState;
 
     private MenuController menuController;
 //    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
@@ -44,12 +40,13 @@ public class Controller {
     }
 
     private Controller() {
+        menuState = new MenuState();
         factory = new ShapeCreator();
         panel = new MyPanel(this);
         frame = new MyFrame();
         frame.setPanel(panel);
 
-        menuController = new MenuController();
+        menuController = MenuController.getInstance(menuState);
         frame.setJMenuBar(menuController.getMenuBar());
 
 
@@ -67,6 +64,7 @@ public class Controller {
         model.addObserver(panel);
     }
     public void mousePressed(Point p){
+        this.factory.configurate(menuState);
         this.actionDraw = new ActionDraw(model, factory.createShape());
         this.actionDraw.createShape(p);
     }

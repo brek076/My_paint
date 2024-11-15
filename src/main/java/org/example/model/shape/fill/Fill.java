@@ -27,4 +27,9 @@ public class Fill implements FillBehavior {
         shape = s;
     }
 
+    @Override
+    public RectangularShape getShape() {
+        return shape;
+    }
+
 }

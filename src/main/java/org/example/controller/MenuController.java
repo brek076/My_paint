@@ -23,8 +23,8 @@ public class MenuController {
 
     private JMenuBar menu;
 
-    public MenuController() {
-        this.menuState = new MenuState();
+    private MenuController(MenuState menuState) {
+        this.menuState = menuState;
 
         menu = new JMenuBar();
         JMenu shapeMenu = createShapeMenu();
@@ -35,9 +35,9 @@ public class MenuController {
         menu.add(colorMenu);
     }
 
-    public static MenuController getInstance(){
+    public static MenuController getInstance(MenuState menuState){
         if(instance == null){
-            instance = new MenuController();
+            instance = new MenuController(menuState);
         }
 
         return instance;
