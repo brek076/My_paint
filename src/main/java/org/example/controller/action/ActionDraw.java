@@ -17,12 +17,21 @@ public class ActionDraw implements AppAction{
         this.sampleShape = shape;
     }
 
-    public void stretchShape(Point point){
-        this.points[0] = (Point2D) point;
-        this.shape.setFrame(points[0], points[1]);
-    }
+//    public void stretchShape(Point point){
+//        this.points[0] = (Point2D) point;
+//        this.shape.setFrame(points[0], points[1]);
+//    }
+//
+//    public void createShape(Point point){
+//        points[1] = (Point2D) point;
+//        System.out.println(sampleShape);
+//        this.shape = sampleShape.clone();
+//        model.createCurrentShape(shape);
+//        // Сделать создание с помощью факторки
+//    }
 
-    public void createShape(Point point){
+    @Override
+    public void mousePressed(Point point) {
         points[1] = (Point2D) point;
         System.out.println(sampleShape);
         this.shape = sampleShape.clone();
@@ -31,12 +40,10 @@ public class ActionDraw implements AppAction{
     }
 
     @Override
-    public void mousePressed(Point point) {
-
-    }
-
-    @Override
     public void mouseDragged(Point point) {
+        this.points[0] = (Point2D) point;
+        this.shape.setFrame(points[0], points[1]);
+
 
     }
 }

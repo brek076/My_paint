@@ -1,8 +1,6 @@
 package org.example.controller;
 
-import org.example.controller.action.ActionDraw;
 import org.example.model.shape.factory.ShapeType;
-import org.example.model.shape.fill.NoFill;
 
 import java.awt.*;
 

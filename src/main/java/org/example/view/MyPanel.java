@@ -2,7 +2,6 @@ package org.example.view;
 
 import org.example.controller.Controller;
 
-import org.example.controller.action.ActionDraw;
 import org.example.model.Model;
 import org.example.model.MyShape;
 

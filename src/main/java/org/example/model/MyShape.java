@@ -12,6 +12,10 @@ import java.awt.geom.RectangularShape;
 public class MyShape implements Cloneable{
     private FillBehavior fb;
 
+    public FillBehavior getFb() {
+        return fb;
+    }
+
     // TODO: 25.10.2024  Попробовать вызовы через разные конструкторы, затем переделать создание через фабрику
     public MyShape() {}
 
@@ -29,6 +33,8 @@ public class MyShape implements Cloneable{
         System.out.println(fb);
         fb.draw(g);
     }
+
+
 
     @Override
     public MyShape clone() {

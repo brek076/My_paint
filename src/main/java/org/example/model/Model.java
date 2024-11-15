@@ -13,6 +13,11 @@ public class Model extends Observable{
     private static Model instance;
     private MyShape currentShape; // Убрать
     private EventManager eventManager;
+
+    public static ArrayList<MyShape> getMyShapes() {
+        return myShapes;
+    }
+
     public static ArrayList<MyShape> myShapes = new ArrayList<MyShape>();
 
     public Model(EventManager  eventManager) {
