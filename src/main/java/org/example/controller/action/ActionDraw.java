@@ -46,4 +46,9 @@ public class ActionDraw implements AppAction{
 
 
     }
+
+    @Override
+    public boolean isFind() {
+        return false;
+    }
 }

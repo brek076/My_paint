@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.controller.action.ActionDraw;
+import org.example.controller.action.ActionMove;
 import org.example.controller.action.AppAction;
 import org.example.model.Model;
 import org.example.model.shape.factory.ShapeCreator;
@@ -21,9 +22,6 @@ public class Controller {
     private Model model;
     private MyFrame frame;
     private MyPanel panel;
-//    private Point2D firstPoint;
-//    private Point2D secondPoint;
-//private ActionDraw actionDraw;
     private AppAction appAction;
     private ShapeCreator factory;
     public MenuState menuState;
@@ -67,8 +65,12 @@ public class Controller {
     }
     public void mousePressed(Point p){
         this.factory.configurate(menuState);
-        this.appAction = new ActionDraw(model, factory.createShape());
-        this.appAction.mousePressed(p);
+        this.appAction = new ActionMove();
+        appAction.mousePressed(p);
+        if(!appAction.isFind()) {
+            this.appAction = new ActionDraw(model, factory.createShape());
+            this.appAction.mousePressed(p);
+        }
     }
 
     public void mouseDragged(Point p){

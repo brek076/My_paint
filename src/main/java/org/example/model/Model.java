@@ -3,7 +3,7 @@ package org.example.model;
 import org.example.controller.Controller;
 import org.example.model.shape.observer.EventManager;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Observable;
