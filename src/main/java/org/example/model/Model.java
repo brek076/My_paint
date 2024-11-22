@@ -20,7 +20,7 @@ public class Model extends Observable{
 
     public static ArrayList<MyShape> myShapes = new ArrayList<MyShape>();
 
-    public Model(EventManager  eventManager) {
+    private Model(EventManager  eventManager) {
         this.eventManager = eventManager;
     }
 

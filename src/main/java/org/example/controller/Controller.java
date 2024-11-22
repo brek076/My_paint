@@ -11,10 +11,9 @@ import org.example.model.shape.observer.LoggingAlertListener;
 import org.example.model.shape.observer.ShapeAlertListener;
 import org.example.view.MyFrame;
 import org.example.view.MyPanel;
+import org.example.view.menu.MenuCreator;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 // TODO: 24.10.2024 Сделать singleton класс
 public class Controller {
@@ -26,7 +25,7 @@ public class Controller {
     private ShapeCreator factory;
     public MenuState menuState;
 
-    private MenuController menuController;
+    private MenuCreator menuCreator;
 //    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
 //    public static boolean selectedFill = false;
 //    public static Color selectedColor = Color.RED;
@@ -46,8 +45,14 @@ public class Controller {
         frame = new MyFrame();
         frame.setPanel(panel);
 
-        menuController = MenuController.getInstance(menuState);
-        frame.setJMenuBar(menuController.getMenuBar());
+        MenuCreator menuCreator = MenuCreator.getInstance(menuState);
+        menuCreator.setState(menuState);
+        menuCreator.setModel(model);
+        frame.setJMenuBar(menuCreator.getMenuBar());
+
+        frame.add(menuCreator.createToolBar(), BorderLayout.NORTH);
+//        menuController = MenuCreator.getInstance(menuState);
+//        frame.setJMenuBar(menuController.getMenuBar());
 
 
         // TODO: 25.10.2024 Поменять наблюдатель на более современную реализацию
