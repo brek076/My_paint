@@ -27,7 +27,9 @@ sourceSets {
 dependencies {
     //compileOnly 'org.projectlombok:lombok:1.18.34'
     //annotationProcessor 'org.projectlombok:lombok:1.18.34'
-
+// https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom
+    implementation group: 'com.fasterxml.jackson', name: 'jackson-bom', version: '2.18.1', ext: 'pom'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     //testCompileOnly 'org.projectlombok:lombok:1.18.34'
     //testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'

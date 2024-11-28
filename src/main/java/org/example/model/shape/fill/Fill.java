@@ -28,6 +28,11 @@ public class Fill implements FillBehavior {
     }
 
     @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
     public RectangularShape getShape() {
         return shape;
     }

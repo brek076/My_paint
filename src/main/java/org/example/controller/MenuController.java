@@ -1,13 +1,10 @@
 package org.example.controller;
 
-import org.example.model.Model;
 import org.example.model.shape.factory.ShapeType;
-import org.example.model.shape.fill.Fill;
-import org.example.model.shape.fill.NoFill;
-import org.example.model.shape.observer.EventManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class MenuController {
     private static MenuController instance;
@@ -30,6 +27,8 @@ public class MenuController {
         JMenu shapeMenu = createShapeMenu();
         JMenu fllMenu = createFillMenu();
         JMenu colorMenu = createColorMenu();
+        JMenu saveOpenMenu = createSaveOpenMenu();
+        menu.add(saveOpenMenu);
         menu.add(shapeMenu);
         menu.add(fllMenu);
         menu.add(colorMenu);
@@ -104,4 +103,31 @@ public class MenuController {
 
         return colorMenu;
     }
+
+    private JMenu createSaveOpenMenu(){
+        // Открыть/сохранить файл
+        JMenu saveOpenMenu = new JMenu("Файл");
+        ButtonGroup group = new ButtonGroup();
+
+        JMenuItem openItem = new JMenuItem(new AbstractAction("Открыть") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileController.open();
+            }
+        });
+        group.add(openItem);
+        saveOpenMenu.add(openItem);
+
+        JMenuItem saveItem = new JMenuItem(new AbstractAction("Сохранить") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileController.save(Controller.getInstance().getModel());
+            }
+        });
+        group.add(saveItem);
+        saveOpenMenu.add(saveItem);
+
+        return saveOpenMenu;
+    }
+
 }

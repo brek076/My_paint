@@ -11,15 +11,13 @@ import java.util.Observable;
 // TODO: 25.10.2024 Сделать singleton класс
 public class Model extends Observable{
     private static Model instance;
-    private MyShape currentShape; // Убрать
+//    private MyShape currentShape; // Убрать
     private EventManager eventManager;
+    public static ArrayList<MyShape> myShapes = new ArrayList<MyShape>();
 
     public static ArrayList<MyShape> getMyShapes() {
         return myShapes;
     }
-
-    public static ArrayList<MyShape> myShapes = new ArrayList<MyShape>();
-
     public Model(EventManager  eventManager) {
         this.eventManager = eventManager;
     }
@@ -45,14 +43,14 @@ public class Model extends Observable{
 //    }
 
     public void draw(Graphics2D g) {
-        currentShape.draw(g);
+//        currentShape.draw(g);
         eventManager.notifyAll("draw");
 //        eventManager.notifyAll("setMyShape");
     }
 
     public void createCurrentShape(MyShape shape){
         //this.currentShape = shape;
-//        eventManager.notifyAll("changeShape");
+        eventManager.notifyAll("changeShape");
         myShapes.add(shape);
     }
 }

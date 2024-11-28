@@ -11,5 +11,8 @@ public interface FillBehavior {
 
     void setShape(RectangularShape s);
 
+
+    Color getColor();
+
     RectangularShape getShape();
 }

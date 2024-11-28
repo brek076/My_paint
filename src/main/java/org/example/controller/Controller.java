@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.example.controller.action.ActionDraw;
 import org.example.controller.action.ActionMove;
 import org.example.controller.action.AppAction;
@@ -13,8 +14,6 @@ import org.example.view.MyFrame;
 import org.example.view.MyPanel;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 // TODO: 24.10.2024 Сделать singleton класс
 public class Controller {
@@ -27,9 +26,6 @@ public class Controller {
     public MenuState menuState;
 
     private MenuController menuController;
-//    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
-//    public static boolean selectedFill = false;
-//    public static Color selectedColor = Color.RED;
 
     public static Controller getInstance(){
         if(instance == null){
@@ -77,7 +73,11 @@ public class Controller {
         this.appAction.mouseDragged(p);
     }
 
-    public void draw(Graphics2D g2) {
-        model.draw(g2);
+    public Model getModel(){
+        return model;
     }
+
+//    public void draw(Graphics2D g2) {
+//        model.draw(g2);
+//    }
 }
