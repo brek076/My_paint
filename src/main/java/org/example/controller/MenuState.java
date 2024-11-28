@@ -12,7 +12,7 @@ public class MenuState {
     public MenuState() {
         this.fill = false;
         this.color = Color.RED;
-        this.shapeType = ShapeType.RENCTAGLE;
+        this.shapeType = ShapeType.RECTANGLE;
     }
 
     public void setFill(boolean fill) {

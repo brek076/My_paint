@@ -5,20 +5,27 @@ import org.example.controller.MenuState;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class SwitchColor implements AppCommand{
-    public SwitchColor(MenuState menuState,  boolean useDefault,  Color defaultColor) { // , JRadioButtonMenuItem radioButton
+
+    private JRadioButtonMenuItem radioButton;
+    private boolean useDefault;
+    private MenuState menuState;
+    private Color defaultColor;
+
+    public SwitchColor(JRadioButtonMenuItem radioButton, boolean useDefault, MenuState menuState, Color defaultColor) {
         this.radioButton = radioButton;
         this.useDefault = useDefault;
         this.menuState = menuState;
         this.defaultColor = defaultColor;
     }
 
-    private JRadioButtonMenuItem radioButton;
-    private boolean useDefault;
-    private MenuState menuState;
-    private Color defaultColor;
     @Override
     public void execute() {
-
+        radioButton.setSelected(!useDefault);
+        Color color = useDefault
+                ? defaultColor
+                : JColorChooser.showDialog(null, "Выбор цвета", Color.BLACK);
+        menuState.setColor(color);
     }
 }
