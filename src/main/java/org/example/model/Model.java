@@ -18,6 +18,11 @@ public class Model extends Observable{
     public static ArrayList<MyShape> getMyShapes() {
         return myShapes;
     }
+
+    public static void setMyShapes(ArrayList<MyShape> newList) {
+        myShapes = newList;
+    }
+
     public Model(EventManager  eventManager) {
         this.eventManager = eventManager;
     }

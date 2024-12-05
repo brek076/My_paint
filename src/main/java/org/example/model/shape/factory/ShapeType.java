@@ -5,7 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
 public enum ShapeType {
-    RENCTAGLE{
+    RECTANGLE {
         @Override
         public Rectangle2D createShape(){
             return new Rectangle2D.Double();
@@ -17,5 +17,5 @@ public enum ShapeType {
             return new Ellipse2D.Double();
         }
     };
-    public  abstract RectangularShape createShape();
+    public abstract RectangularShape createShape();
 }

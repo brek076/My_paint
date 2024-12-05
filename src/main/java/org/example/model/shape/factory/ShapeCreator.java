@@ -3,6 +3,7 @@ package org.example.model.shape.factory;
 import org.example.controller.Controller;
 import org.example.controller.MenuState;
 import org.example.model.MyShape;
+import org.example.model.MyShapeJSON;
 import org.example.model.shape.fill.Fill;
 import org.example.model.shape.fill.FillBehavior;
 import org.example.model.shape.fill.NoFill;
@@ -23,6 +24,19 @@ public class ShapeCreator {
 
     public void configurate(MenuState state){
         this.state = state;
+    }
+
+    public MyShape createShape(MyShapeJSON myShapeJSON){
+        MyShape myShape = new MyShape();
+        RectangularShape shape = ShapeType.values()[myShapeJSON.idShapeType].createShape();
+
+        shape.setFrame(myShapeJSON.x, myShapeJSON.y, myShapeJSON.w, myShapeJSON.h);
+        FillBehavior fb = myShapeJSON.isFilled ? new Fill() : new NoFill();
+        fb.setColor(myShapeJSON.color);
+        fb.setShape(shape);
+
+        myShape.setFb(fb);
+        return myShape;
     }
 
     public MyShape createShape(){

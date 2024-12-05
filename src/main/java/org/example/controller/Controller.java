@@ -77,6 +77,7 @@ public class Controller {
         return model;
     }
 
+
 //    public void draw(Graphics2D g2) {
 //        model.draw(g2);
 //    }

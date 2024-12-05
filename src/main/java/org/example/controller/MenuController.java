@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.model.Model;
 import org.example.model.shape.factory.ShapeType;
 
 import javax.swing.*;
@@ -48,7 +49,7 @@ public class MenuController {
         JMenu shapeMenu = new JMenu("Фигура");
         ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem square = new JRadioButtonMenuItem("Прямоугольник");
-        square.addActionListener(e -> menuState.setShapeType(ShapeType.RENCTAGLE));
+        square.addActionListener(e -> menuState.setShapeType(ShapeType.RECTANGLE));
         square.setSelected(true);
         shapeMenu.add(square);
 
@@ -112,7 +113,7 @@ public class MenuController {
         JMenuItem openItem = new JMenuItem(new AbstractAction("Открыть") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FileController.open();
+                Model.setMyShapes(FileController.open());
             }
         });
         group.add(openItem);
