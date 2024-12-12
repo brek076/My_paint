@@ -1,8 +1,9 @@
 package org.example.controller;
 
-import org.example.controller.action.ActionDraw;
-import org.example.controller.action.ActionMove;
-import org.example.controller.action.AppAction;
+import org.example.controller.actions.ActionDraw;
+import org.example.controller.actions.ActionMove;
+import org.example.controller.actions.AppAction;
+import org.example.controller.state.UndoMachine;
 import org.example.model.Model;
 import org.example.model.shape.factory.ShapeCreator;
 import org.example.model.shape.observer.EventListeners;
@@ -24,6 +25,7 @@ public class Controller {
     private AppAction appAction;
     private ShapeCreator factory;
     public MenuState menuState;
+    public static UndoMachine undoMachine;
 
     private MenuCreator menuCreator;
 //    public static ShapeType selectedShape = ShapeType.RENCTAGLE;
@@ -39,6 +41,8 @@ public class Controller {
     }
 
     private Controller() {
+        undoMachine = new UndoMachine();
+
         menuState = new MenuState();
         factory = new ShapeCreator();
         panel = new MyPanel(this);
@@ -65,6 +69,7 @@ public class Controller {
         eventManager.subscribe(shapeAlertListener);
         eventManager.subscribe(loggingAlertListener);
 
+
         model = Model.getInstance(eventManager);
         model.addObserver(panel);
     }
@@ -76,6 +81,9 @@ public class Controller {
             this.appAction = new ActionDraw(model, factory.createShape());
             this.appAction.mousePressed(p);
         }
+
+        undoMachine.add(this.appAction.cloneAction());
+        undoMachine.updateButtons();
     }
 
     public void mouseDragged(Point p){

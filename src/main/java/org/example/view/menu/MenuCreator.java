@@ -1,5 +1,6 @@
 package org.example.view.menu;
 
+import org.example.controller.Controller;
 import org.example.controller.MenuState;
 import org.example.model.Model;
 import org.example.model.shape.factory.ShapeType;
@@ -59,26 +60,38 @@ public class MenuCreator {
         URL ellipseUrl = getClass().getClassLoader().getResource("ico/ellipse_16x16.png");
         ImageIcon ellipseIco = ellipseUrl == null ? null : new ImageIcon(ellipseUrl);
         AppCommand ellipseCommand =  new SwitchShape(ShapeType.ELLIPSE, getMenuState());
-        menuItems.add(new CommandActionListener("Цвет", ellipseIco, ellipseCommand));
+        menuItems.add(new CommandActionListener("Элипс'", ellipseIco, ellipseCommand));
 
         // Квадрат
         URL renctagleUrl = getClass().getClassLoader().getResource("ico/rectangular_16x16.png");
         ImageIcon rectangleIco = renctagleUrl == null ? null : new ImageIcon(renctagleUrl);
         AppCommand rectangleCommand =  new SwitchShape(ShapeType.RECTANGLE, getMenuState());
-        menuItems.add(new CommandActionListener("Цвет", rectangleIco, rectangleCommand));
+        menuItems.add(new CommandActionListener("Квадрат", rectangleIco, rectangleCommand));
 
         // С заливкой
         URL fillUrl = getClass().getClassLoader().getResource("ico/fill_16x16.png");
         ImageIcon fillIco = fillUrl == null ? null : new ImageIcon(fillUrl);
         AppCommand fillCommand =  new SwitchFill(true, getMenuState());
-        menuItems.add(new CommandActionListener("Цвет", fillIco, fillCommand));
+        menuItems.add(new CommandActionListener("С заливкой", fillIco, fillCommand));
 
 
         // Без заливки
         URL no_fillUrl = getClass().getClassLoader().getResource("ico/no_fill_16x16.png");
         ImageIcon no_fillIco = no_fillUrl == null ? null : new ImageIcon(no_fillUrl);
         AppCommand no_fillCommand =  new SwitchFill(false, getMenuState());
-        menuItems.add(new CommandActionListener("Цвет", no_fillIco, no_fillCommand));
+        menuItems.add(new CommandActionListener("Без заливки", no_fillIco, no_fillCommand));
+
+        // Отмена
+        URL undoUrl = getClass().getClassLoader().getResource("ico/undo_16x16.png");
+        ImageIcon undoIco = undoUrl == null ? null : new ImageIcon(undoUrl);
+        AppCommand undoCommand =  new SwitchUndo(Controller.undoMachine);
+        menuItems.add(new CommandActionListener("Отмена", undoIco, undoCommand));
+
+        // Повтор
+        URL redoUrl = getClass().getClassLoader().getResource("ico/redo_16x16.png");
+        ImageIcon redoIco = redoUrl == null ? null : new ImageIcon(redoUrl);
+        AppCommand redoCommand = new SwitchRedo(Controller.undoMachine);
+        menuItems.add(new CommandActionListener("Повтор", redoIco, redoCommand));
 
         return menuItems;
     }
@@ -118,7 +131,6 @@ public class MenuCreator {
 
         return fillMenu;
     }
-
 
     private JMenu createColorMenu(){
         // Цвет

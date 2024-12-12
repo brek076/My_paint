@@ -1,4 +1,4 @@
-package org.example.controller.action;
+package org.example.controller.actions;
 
 import org.example.model.Model;
 import org.example.model.MyShape;
@@ -15,6 +15,21 @@ public class ActionMove implements  AppAction{
 
     public boolean isFind(){
         return shape != null;
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
+    public void unexecute() {
+
+    }
+
+    @Override
+    public AppAction cloneAction() {
+        return null;
     }
 
     @Override

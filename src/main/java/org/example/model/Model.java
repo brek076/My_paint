@@ -50,6 +50,14 @@ public class Model extends Observable{
 //        eventManager.notifyAll("setMyShape");
     }
 
+    public void removeLastShape(){
+        myShapes.remove(myShapes.size() - 1 );
+    }
+
+    public MyShape getLastShape(){
+        return myShapes.get(myShapes.size() - 1 );
+    }
+
     public void createCurrentShape(MyShape shape){
         //this.currentShape = shape;
 //        eventManager.notifyAll("changeShape");
