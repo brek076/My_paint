@@ -34,12 +34,12 @@ public class UndoMachine {
     }
 
     public boolean isEnableUndo() {
-        return undoRedoState.getUndoActivityList().size() > 0;
+        return !undoRedoState.getUndoActivityList().isEmpty();
     }
 
 
     public boolean isEnableRedo() {
-        return undoRedoState.getRedoActivityList().size() > 0;
+        return !undoRedoState.getRedoActivityList().isEmpty();
     }
 
     public void updateButtons(){
@@ -50,7 +50,6 @@ public class UndoMachine {
     public void add(AppAction action) {
         undoRedoState.clearHistory();
         undoRedoState.addAction(action);
-        //TODO: Определить переход по состоянию
-        //undoRedoState = ;
+        undoRedoState = new StateEnableUndoDisableRedo(undoRedoState.getUndoActivityList(), undoRedoState.getRedoActivityList());
     }
 }

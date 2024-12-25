@@ -12,7 +12,10 @@ import org.example.model.shape.observer.LoggingAlertListener;
 import org.example.model.shape.observer.ShapeAlertListener;
 import org.example.view.MyFrame;
 import org.example.view.MyPanel;
+import org.example.view.menu.CommandActionListener;
 import org.example.view.menu.MenuCreator;
+import org.example.view.menu.SwitchRedo;
+import org.example.view.menu.SwitchUndo;
 
 import java.awt.*;
 
@@ -41,7 +44,10 @@ public class Controller {
     }
 
     private Controller() {
-        undoMachine = new UndoMachine();
+        CommandActionListener undoAction = new CommandActionListener(new SwitchUndo(undoMachine));
+        CommandActionListener redoAction = new CommandActionListener(new SwitchRedo(undoMachine));
+
+        undoMachine = new UndoMachine(undoAction, redoAction);
 
         menuState = new MenuState();
         factory = new ShapeCreator();
