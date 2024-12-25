@@ -48,8 +48,18 @@ public class UndoMachine {
     }
 
     public void add(AppAction action) {
-        undoRedoState.clearHistory();
+        // Очищаем redo только если это новое действие, а не продолжение undo/redo операций
+        if (!undoRedoState.getRedoActivityList().isEmpty()) {
+            undoRedoState.clearHistory();  // Очищаем redo список
+        }
+
+        // Добавляем новое действие в undo список
         undoRedoState.addAction(action);
-        undoRedoState = new StateEnableUndoDisableRedo(undoRedoState.getUndoActivityList(), undoRedoState.getRedoActivityList());
+
+        // Переходим в состояние "Undo доступен, Redo недоступен"
+        undoRedoState = new StateEnableUndoDisableRedo(
+                undoRedoState.getUndoActivityList(),
+                undoRedoState.getRedoActivityList()
+        );
     }
 }

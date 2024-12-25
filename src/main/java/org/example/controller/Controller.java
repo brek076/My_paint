@@ -24,7 +24,7 @@ public class Controller {
     private static Controller instance;
     private Model model;
     private MyFrame frame;
-    private MyPanel panel;
+    static private MyPanel panel;
     private AppAction appAction;
     private ShapeCreator factory;
     public MenuState menuState;
@@ -91,6 +91,11 @@ public class Controller {
         undoMachine.add(this.appAction.cloneAction());
         undoMachine.updateButtons();
     }
+
+    static public  void updateUI(){
+        panel.updateUI();
+    }
+
 
     public void mouseDragged(Point p){
         this.appAction.mouseDragged(p);

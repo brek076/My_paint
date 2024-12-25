@@ -15,16 +15,19 @@ public class StateEnableUndoDisableRedo extends UndoRedoState {
         LinkedList<AppAction> undoActivityList = getUndoActivityList();
         LinkedList<AppAction> redoActivityList = getRedoActivityList();
         AppAction action = undoActivityList.pollLast();
+
         if (action != null) {
-            redoActivityList.add(action);
-            action.unexecute();
+            redoActivityList.add(action);  // Перемещаем в redo список
+            action.unexecute();  // Отменяем действие
         }
 
+        // Если undo список пуст, но redo доступен, переходим в состояние "Redo доступен"
         if (undoActivityList.isEmpty()) {
-            return new StateDisableUndoEnableRedo(getUndoActivityList(), getRedoActivityList());
-        } else {
-            return this;
+            return new StateDisableUndoEnableRedo(undoActivityList, redoActivityList);
         }
+
+        // Переход в состояние, где доступны оба действия
+        return new StateEnableUndoEnableRedo(undoActivityList, redoActivityList);
     }
 
     @Override
